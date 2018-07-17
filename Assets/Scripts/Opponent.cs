@@ -5,6 +5,7 @@ using UnityEngine;
 public class Opponent : MonoBehaviour
 {
     private Rigidbody rb;
+    private Animator anim;
 
     [SerializeField]
     private GameObject ball;
@@ -21,7 +22,8 @@ public class Opponent : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-	}
+        anim = GetComponent<Animator>();
+    }
 	
 	void FixedUpdate()
     {
@@ -47,5 +49,7 @@ public class Opponent : MonoBehaviour
     {
         if (rb.velocity.magnitude > maxRunSpeed)
             rb.velocity = Vector3.Normalize(rb.velocity) * maxRunSpeed;
+
+        anim.SetBool("IsWalking", rb.velocity.magnitude > 0);
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     private Rigidbody rb;
+    private Animator anim;
 
     [SerializeField]
     private float minBallDist = 0.5f;
@@ -21,6 +22,7 @@ public class Player : MonoBehaviour
 	void Start()
     {
         rb = GetComponent<Rigidbody>();
+        anim = GetComponent<Animator>();
 	}
 	
 	void Update()
@@ -74,5 +76,7 @@ public class Player : MonoBehaviour
     {
         if(rb.velocity.magnitude > maxRunSpeed)
             rb.velocity = Vector3.Normalize(rb.velocity) * maxRunSpeed;
+
+        anim.SetBool("IsWalking", rb.velocity.magnitude > 0);
     }
 }
